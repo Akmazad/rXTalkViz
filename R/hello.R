@@ -20,6 +20,6 @@
 #'
 #' @examples
 #' hello()
-hello <- function() {
-  print("Hello, world!")
+hello <- function(x) {
+  x^2
 }
