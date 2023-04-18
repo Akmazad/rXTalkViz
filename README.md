@@ -1,6 +1,9 @@
 # rXTalkViz: A visualization tool for functional cross-talks from enrichment analysis
 TBD
 
+# Installation
+TBD
+
 ## rXTalkViz Main Applications
 TBD
 
