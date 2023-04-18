@@ -4,7 +4,7 @@ TBD
 # Installation
 TBD
 
-## rXTalkViz Main Applications
+## Main Applications
 TBD
 
 ## Latest News
