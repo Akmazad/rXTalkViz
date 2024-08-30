@@ -1,14 +1,45 @@
+#' This function works as a wrapper for running the whole cross-talk analysis pipeline, including the Type-I and Type-II cross-talk quantification, visualization and the result exports.
+#'
+#' @param enrich.df Enrichment object (a R dataframe) that has the following column names: "Description", "Pathway.geneSymbol","Overlapping.geneSymbol","Overlapping.geneID", "Count", "GeneRatio", "pvalue","p.adjust")
+#' @param showCategory A number for thresholding the number pathways to be included in the analysis
+#' @param doPlot A logical value to decide if the cross-talk visualization should be done while running the analysis
+#' @param doXtalkQuant A logical value to decide if the cross-talk quantification should be done while running the analysis
+#' @param layout A string that should indicate the layout name (see igraph layout names)
+#' @param colorEdge A logical value to decide if the edges should be colored in the network plots
+#' @param isCircular A logical value to decide if the network plot should be circular
+#' @param nPermute A number to indicate how many times the permutations should be done for computing p-values for each Type-II cross-talks
+#' @param neighbourhood_th A number to threshold the PPI neighborhood while calculating the network proximity
+#' @param string_PPI_score_th A number to threshold for filtering PPI confidence scores from String Database
+#' @param plot_width A number for specifying the plot width
+#' @param plot_height A number for specifying the plot height
+#' @param min_cross_talk_score A number to threshold the cross-talk scores to reduce the visulization
+#' @param outdir A directory that indicates where the outputs will be saved (all the plot PDFs, raw ggplot2 objects and the final report as csv)
+#'
+#' @return ""
+#' @export ""
+#'
+#' @examples
+#' library(rXTalkViz)
+#' library(dplyr)
+#' filtered_df <- example_enrich.df %>% filter(p.adjust < 0.001)
+#' xTalk_wrapper(filtered_df,
+#'               doPlot = TRUE,
+#'               doXtalkQuant = TRUE,
+#'               nPermute = 2,
+#'               min_cross_talk_score = 1.0,
+#'               plot_width = 10,
+#'               plot_height = 10)
+
 xTalk_wrapper <-
   function(enrich.df = NULL,
            # CrossTalk_Type = "Type_II",
            showCategory = 100,
-           fc.dat   = NULL,
+           # fc.dat   = NULL,
            doPlot = T,
            doXtalkQuant = T,
            layout = "linear",
            colorEdge = T,
            isCircular = T,
-           node_label = "all",
            nPermute = 10,
            neighbourhood_th = 1,
            string_PPI_score_th = 900,
@@ -32,11 +63,10 @@ xTalk_wrapper <-
       plot.obj <- xTalkPlot.Type_I.NetworkView(enrich.df = enrich.df,
                                    string_PPI_score_th = string_PPI_score_th,
                                    showCategory = showCategory,
-                                   fc.dat = fc.dat,
+                                   # fc.dat = fc.dat,
                                    layout = layout,
                                    colorEdge = colorEdge,
-                                   circular = isCircular,
-                                   node_label = node_label)
+                                   circular = isCircular)
       save(plot.obj, file = paste0(outdir, "xTalkPlot.Type_I.NetworkView.obj.RData"))
       plot.obj %>%
         ggsave(filename = paste0(outdir, "xTalkPlot_Type_I.pdf"),
@@ -188,13 +218,3 @@ xTalk_wrapper <-
     }
     # ----
   }
-# enrich.df = readRDS("C:\\Users\\Hp\\OneDrive - Imam university\\Documents\\Az projects\\COVID_CDR Projects\\COVID_CDR_Cyclosporine_Selinexor_comb_therapy\\data\\DB00091_KEGG_2021_Human_all.rds")
-# enrich.df <- enrich.df %>%
-#   dplyr::filter(p.adjust < 0.001)
-# enrich.df %>%
-#   xTalk_wrapper(doPlot = T,
-#                 doXtalkQuant = T,
-#                 nPermute = 2,
-#                 min_cross_talk_score = 1.0,
-#                 plot_width = 10,
-#                 plot_height = 10)

@@ -1,6 +1,15 @@
-# note: any word-search-based methods (i.e., jaccard index) should
-# take care of gene name aliases
-
+#' A function to quantify Type-I cross-talk among pathways from enrichment analysis
+#'
+#' @param neighbourhood_th A number to threshold the PPI neighborhood while calculating the network proximity
+#' @param string_PPI_score_th A number to threshold for filtering PPI confidence scores from String Database
+#' @param pathway_a A set of strings which indicates gene symbols
+#' @param pathway_b A set of strings which indicates gene symbols
+#'
+#' @return a vector of values: 1) the jaccard-index (as Type-I cross-talk score), 2) number of common/shared genes, 3) the common gene symbols (comma seperated)
+#' @export ""
+#'
+#' @examples ""
+#' ""
 quantify_crossTalk_jaccard_index <- function(
     neighbourhood_th,
     string_PPI_score_th,
@@ -19,26 +28,40 @@ quantify_crossTalk_jaccard_index <- function(
            intersect(pathway_a, pathway_b) %>%
              paste0(collapse = ";")))
 }
-quantify_crossTalk_MLE <- function(
-    neighbourhood_th,
-    pathway_a=c(),
-    pathway_b=c()){
-  # DONATO ET AL: https://genome.cshlp.org/content/23/11/1885
+# quantify_crossTalk_MLE <- function(
+#     neighbourhood_th,
+#     pathway_a=c(),
+#     pathway_b=c()){
+#   # DONATO ET AL: https://genome.cshlp.org/content/23/11/1885
+#
+#   # load stringdb
+#   string_db <- STRINGdb$new( version="11.5", species=9606,
+#                              score_threshold=200, network_type="full", input_directory="")
+# }
 
-  # load stringdb
-  string_db <- STRINGdb$new( version="11.5", species=9606,
-                             score_threshold=200, network_type="full", input_directory="")
-}
+# quantify_crossTalk_functional_proximity <- function(
+#     neighbourhood_th,
+#     string_PPI_score_th,
+#     pathway_a = c(),
+#     pathway_b = c(),
+#     nPermute
+# ){
+#
+# }
 
-quantify_crossTalk_functional_proximity <- function(
-    neighbourhood_th,
-    string_PPI_score_th,
-    pathway_a = c(),
-    pathway_b = c(),
-    nPermute
-){
-
-}
+#' A function to quantify Type-II cross-talk among pathways from enrichment analysis
+#'
+#' @param neighbourhood_th A number to threshold the PPI neighborhood while calculating the network proximity
+#' @param string_PPI_score_th A number to threshold for filtering PPI confidence scores from String Database
+#' @param pathway_a A set of strings which indicates gene symbols
+#' @param pathway_b A set of strings which indicates gene symbols
+#' @param nPermute A number to indicate how many times the permutations should be done for computing p-values for each Type-II cross-talks
+#'
+#' @return Network proximity score as the Type-II cross-talk value
+#' @export ""
+#'
+#' @examples ""
+#' ""
 quantify_crossTalk_network_proximity <- function(
     neighbourhood_th,
     string_PPI_score_th,

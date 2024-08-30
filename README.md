@@ -1,5 +1,4 @@
-# rXTalkViz: A visualization tool for functional cross-talks from enrichment analysis
-TBD
+# rXTalkViz: A tool for quantification and visualization of functional cross-talks from enrichment analysis
 
 ## Introduction
 The `rXTalkViz` package provides tools for quantifying and visualizing cross-talks between biological pathways. It models the pathway cross-talks in two categories:
@@ -7,7 +6,7 @@ The `rXTalkViz` package provides tools for quantifying and visualizing cross-tal
 1. **Type-I cross-talks**: Via shared nodes (genes/proteins/molecules) - quantified with Jaccard-Index score.
 2. **Type-II cross-talks**: Via shared interactions (Protein-Protein interactions, or data-driven interactions) - quantified with Network proximity scores.
 
-Visualizations include network plots, Sankey diagrams, and heatmap plots. The quantification results are also saved as a spreadsheet (CSV file). This guide will walk you through the basic usage of the package, including data loading, cross-talk analysis, and result visualization.
+Visualizations include network plots, Sankey diagrams, and heatmap plots. The quantification results are also saved as a spreadsheet (CSV file), which can be an input for other bioinformatics pipeline. The plot objects (ggplot2) are also saved within the result directory so that the users can visualize them with their own preferred settings. This guide will walk you through the basic usage of the package, including data loading, cross-talk analysis, and result visualization.
 
 ## Installation
 ```r
@@ -37,24 +36,22 @@ To focus on the most significant pathways, we will filter the dataset to include
 
 
 ```r
-filtered_data <- example_enrich.df %>%
+filtered_df <- example_enrich.df %>%
   filter(p.adjust < 0.001)
-filtered_data %>% nrow
+filtered_df %>% nrow
 ```
 
 ### Step 4: Performing Cross-Talk Analysis
-With the filtered data, we can now perform cross-talk analysis using the xTalk_wrapper function. This function allows you to quantify, visualize cross-talks between pathways, and save all the results within the specified directory. Note, if the directory doesn't exist, it will create on but with a warning, and the directory name can be specified by changing the 'outdir' parameter.
+With the filtered data, we can now perform cross-talk analysis using the `xTalk_wrapper` function. This function allows you to quantify, visualize cross-talks between pathways, and save all the results within the specified directory. Note, if the directory doesn't exist, it will create on but with a warning, and the directory name can be specified by changing the 'outdir' parameter.
 
 ```r
-# filtered_df <- example_enrich.df %>%
-#   filter(p.adjust < 0.001)
-# xTalk_wrapper(filtered_df,
-#               doPlot = T,
-#               doXtalkQuant = T,
-#               nPermute = 2,
-#               min_cross_talk_score = 1.0,
-#               plot_width = 10,
-#               plot_height = 10)
+xTalk_wrapper(filtered_df,
+             doPlot = TRUE,
+             doXtalkQuant = TRUE,
+             nPermute = 2,
+             min_cross_talk_score = 1.0,
+             plot_width = 10,
+             plot_height = 10)
 ```
 
 ```r
@@ -65,11 +62,9 @@ p <- xTalkPlot.Type_I.NetworkView(
   enrich.df = filtered_df,
   string_PPI_score_th = string_PPI_score_th,
   showCategory = 100,
-  fc.dat = NULL,
   layout = "linear",
   colorEdge = T,
-  circular = T,
-  node_label = "all")
+  circular = T)
 p
 ```
 

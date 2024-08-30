@@ -1,6 +1,6 @@
 Package: rXTalkViz
 Type: Package
-Title: a Visualization Tool for Functional Cross-talks from Pathway Enrichment Analysis
+Title: A tool for quantification and visualization of functional cross-talks from enrichment analysis
 Version: 0.1.0
 Author: AKM Azad
 Maintainer: AKM Azad <kazad@imamu.edu.sa>
@@ -10,7 +10,7 @@ Description: Pathway enrichment is a crucial step in any downstream analysis of 
         this package will be able to help user to not only visualize those functional cross-talks among the enriched pathways or functional terms as a publication-ready network plot, but also enable the user to identify which critical part of the whole biological system plays the driving role for the perturbation.
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Imports:
     roxygen2,
     dplyr,
@@ -21,6 +21,11 @@ Imports:
     ggplot2,
     cowplot,
     tidyr,
+    ComplexHeatmap,
+    htmlwidgets,
+    networkD3,
+    imputeTS,
+    tibble,
     dplyr,
     stringr,
     DOSE,
