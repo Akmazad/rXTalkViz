@@ -1,0 +1,39 @@
+## ----include = FALSE----------------------------------------------------------
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+## ----setup--------------------------------------------------------------------
+library(rXTalkViz)
+library(dplyr)
+library(data.table)
+
+## -----------------------------------------------------------------------------
+# data(example_enrich.df, package = "rXTalkViz")
+
+## ----out.width="100%", out.height="100%"--------------------------------------
+# filtered_df <- example_enrich.df %>%
+#   filter(p.adjust < 0.001)
+# xTalk_wrapper(filtered_df,
+#               doPlot = T,
+#               doXtalkQuant = T,
+#               nPermute = 2,
+#               min_cross_talk_score = 1.0,
+#               plot_width = 10,
+#               plot_height = 10)
+
+## ----out.width="100%", out.height="100%"--------------------------------------
+filtered_df <- example_enrich.df %>%
+  filter(p.adjust < 0.001)
+
+xTalkPlot.Type_I.NetworkView(
+  enrich.df = filtered_df,
+  string_PPI_score_th = string_PPI_score_th,
+  showCategory = 100,
+  fc.dat = NULL,
+  layout = "linear",
+  colorEdge = T,
+  circular = T,
+  node_label = "all")
+

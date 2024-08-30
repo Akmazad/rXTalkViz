@@ -1,0 +1,33 @@
+---
+title: "rXTalkViz"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(rXTalkViz)
+library(dplyr)
+library(data.table)
+```
+
+```{r out.width="100%", out.height="100%"}
+xTalkPlot(enrich.df = EnrichmentResult_GO_MF %>% 
+            dplyr::filter(p.adjust < 0.05) %>% 
+            as.data.frame(),
+          colorEdge = F,
+          fc.dat = de_res %>%
+            dplyr::select(c("Gene.names","logFC")) %>% 
+            as.data.frame()
+)
+```
+
