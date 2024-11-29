@@ -1,5 +1,20 @@
 # rXTalkViz: A tool for quantification and visualization of functional cross-talks from enrichment analysis
-
+Original article can be cited as:
+```
+@article{Azad2024,
+  title = {rXTalkViz: A R package to quantify,  visualize,  and report carcinogenic footprints of functional pathway cross-talks},
+  volume = {22},
+  ISSN = {2665-9638},
+  url = {http://dx.doi.org/10.1016/j.simpa.2024.100708},
+  DOI = {10.1016/j.simpa.2024.100708},
+  journal = {Software Impacts},
+  publisher = {Elsevier BV},
+  author = {Azad,  A.K.M.},
+  year = {2024},
+  month = nov,
+  pages = {100708}
+}
+```
 ## Introduction
 The `rXTalkViz` package provides tools for quantifying and visualizing cross-talks between biological pathways. It models the pathway cross-talks in two categories:
 
