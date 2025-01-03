@@ -88,4 +88,5 @@ In this network plot, Type-I cross-talks is shown among highly enriched pathways
 ## Conclusion
 In this vignette, we demonstrated the basic functionality of the rXTalkViz package. We loaded example data, filtered it based on significance, and performed cross-talk analysis. For more detailed analysis, refer to the package documentation.
 
-
+## Acknowledgement
+We thank the Dr. Guangchuang (YuLabSMU) for his excellent R package: clusterprofiler, as some parts of the network visualization code in our work have been reproduced/inspired by that package. 
